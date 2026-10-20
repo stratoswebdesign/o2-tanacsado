@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
-import hrStrategia from "@/images/hr-strategia.png";
-import toborzas from "@/images/toborzas.png";
-import munkakorok from "@/images/munkakorok.png";
-import szervezetfejlesztes from "@/images/szervezetfejlesztes.png";
+import hrStrategia from "@/images/dontesi-terkep.jpg";
+import toborzas from "@/images/ceges-diagnozis.jpg";
+import munkakorok from "@/images/munkakorok-dokumentumok.jpg";
+import szervezetfejlesztes from "@/images/havi-egyuttmukodes.jpg";
 import marczali from "@/images/marczali-tibor.png";
 import wortmann from "@/images/wortmann-adam.png";
 
@@ -51,7 +51,7 @@ export const SERVICES: Service[] = [
     business:
       "Az emberekkel kapcsolatos döntések akkor támogatják az üzleti növekedést, ha a cég céljaihoz kapcsolódnak. A HR-stratégia ezt a kapcsolatot teremti meg: a vezetés tudja, milyen csapatra van szüksége a következő évekre, és mit tesz a kulcsemberek megtartásáért.",
     image: hrStrategia,
-    imageAlt: "Vezető üzleti riportokat és grafikonokat elemez az asztalnál",
+    imageAlt: "Tervezés öntapadós cetlikkel egy irodai üvegfalon",
   },
   {
     id: "toborzas",
@@ -73,7 +73,7 @@ export const SERVICES: Service[] = [
     business:
       "A betöltetlen kulcspozíció közvetlen üzleti költség: csúszó projektek, túlterhelt vezetők, elmaradó bevétel. A tudatos toborzási stratégia azt biztosítja, hogy a cég a valóban fontos pozíciókra koncentráljon, és a kiválasztás a vállalat igényeiből induljon ki.",
     image: toborzas,
-    imageAlt: "Kollégák közösen egyeztetnek dokumentumok fölött egy tárgyalóban",
+    imageAlt: "Négyszemközti beszélgetés egy irodai íróasztalnál",
   },
   {
     id: "munkakorok",
@@ -95,7 +95,7 @@ export const SERVICES: Service[] = [
     business:
       "A tisztázatlan munkakörök lassítják a működést és feszültséget okoznak a csapatban. Az átlátható struktúra egyszerűbbé teszi a delegálást, a teljesítmény megítélését és az új kollégák beillesztését is.",
     image: munkakorok,
-    imageAlt: "Három kolléga laptop és jegyzetek fölött dolgozik együtt",
+    imageAlt: "Vezetők dokumentumokat egyeztetnek egy tárgyalóasztalnál",
   },
   {
     id: "szervezetfejlesztes",
@@ -117,7 +117,7 @@ export const SERVICES: Service[] = [
     business:
       "A fejlesztés akkor éri meg, ha valós szervezeti problémára válaszol. A diagnózisra épülő terv a képzési költséget oda irányítja, ahol a működés hatékonysága és a kollégák motivációja ténylegesen javítható.",
     image: szervezetfejlesztes,
-    imageAlt: "Csapat felülnézetből egy hosszú asztalnál laptopokkal dolgozik",
+    imageAlt: "Vezető beszél a vezetői csapatnak egy tárgyalóban",
   },
 ];
 

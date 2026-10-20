@@ -54,8 +54,6 @@
 .docTitle {
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   margin-bottom: 0.2em;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
 }
 
 .docMeta {

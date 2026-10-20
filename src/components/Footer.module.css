@@ -37,10 +37,9 @@
 }
 
 .heading {
+  letter-spacing: normal;
   font-family: var(--font-body);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
   color: var(--muted);
   margin: 0 0 14px;
   font-weight: 700;

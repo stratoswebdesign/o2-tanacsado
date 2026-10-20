@@ -31,29 +31,50 @@
 .heroFacts {
   list-style: none;
   display: grid;
-  gap: 8px;
-  margin-top: 26px;
-  max-width: 60ch;
-  color: var(--ink-2);
-  font-size: 0.98rem;
+  gap: 14px;
+  margin-top: 28px;
+  max-width: 34em;
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
 .heroFacts li {
-  position: relative;
-  padding-left: 18px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 14px;
+  align-items: start;
+  text-wrap: pretty;
 }
 
-.heroFacts li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 9px;
-  height: 9px;
+.heroFactMark {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border: 2px solid var(--teal);
+  background: var(--teal);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  margin-top: -1px;
+}
+
+.heroFactMark svg {
+  width: 15px;
+  height: 15px;
+}
+
+.heroLead {
+  margin: 26px 0 0;
+  max-width: 58ch;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.heroLead strong {
+  color: var(--ink-2);
 }
 
 .heroVisual {
@@ -87,14 +108,18 @@
   object-fit: cover;
 }
 
-.heroSquare {
+/* Türkiz félkör a fekete-fehér fotón (szorzó keveréssel, mint a régi kék alakzatok). */
+.heroCircle::after {
+  content: "";
   position: absolute;
-  right: -3%;
-  bottom: -3%;
-  width: 24%;
+  width: 96%;
   aspect-ratio: 1;
-  background: var(--teal);
-  border-radius: 6px;
+  left: 58%;
+  top: -40%;
+  border-radius: 50%;
+  background: var(--logo);
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -104,10 +129,6 @@
 
   .heroDisc {
     animation-delay: 0.1s;
-  }
-
-  .heroSquare {
-    animation-delay: 0.25s;
   }
 
   @keyframes rise {
@@ -197,10 +218,9 @@
 
 .answer {
   margin: 22px 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
-  line-height: 1.3;
-  letter-spacing: -0.012em;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.45;
   color: var(--ink);
   text-wrap: balance;
 }

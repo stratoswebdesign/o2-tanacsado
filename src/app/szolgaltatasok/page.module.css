@@ -89,14 +89,25 @@
   object-fit: cover;
 }
 
-.square {
+/* Türkiz félkör a fekete-fehér fotón; a váltakozó szekciókon a másik oldalon. */
+.circle::after {
+  content: "";
   position: absolute;
-  right: -4%;
-  bottom: -4%;
-  width: 26%;
+  width: 96%;
   aspect-ratio: 1;
-  background: var(--teal-tint-2);
-  border-radius: 6px;
+  left: 50%;
+  top: -40%;
+  border-radius: 50%;
+  background: var(--logo);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.serviceAlt .circle::after {
+  left: auto;
+  right: 50%;
+  top: auto;
+  bottom: -40%;
 }
 
 .body h2 {
@@ -163,10 +174,9 @@
 }
 
 .detailsTitle {
+  letter-spacing: normal;
   font-family: var(--font-body);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
   color: var(--muted);
   margin-bottom: 8px;
 }

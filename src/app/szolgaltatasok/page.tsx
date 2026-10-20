@@ -5,10 +5,10 @@ import { ArrowRight } from "@/components/Icons";
 import { Rich, plain } from "@/components/Rich";
 import { breadcrumbLd, jsonLd, pageMetadata } from "@/lib/seo";
 import { LEGAL_NAME, SITE_URL } from "@/lib/site";
-import hrStrategia from "@/images/hr-strategia.png";
-import munkakorok from "@/images/munkakorok.png";
-import szervezetfejlesztes from "@/images/szervezetfejlesztes.png";
-import toborzas from "@/images/toborzas.png";
+import cegesDiagnozis from "@/images/ceges-diagnozis.jpg";
+import dontesiTerkep from "@/images/dontesi-terkep.jpg";
+import ertekeles360 from "@/images/ertekeles-360.jpg";
+import haviEgyuttmukodes from "@/images/havi-egyuttmukodes.jpg";
 import styles from "./page.module.css";
 
 const LEAD =
@@ -39,7 +39,7 @@ const OFFERS: Offer[] = [
       "60–75 perces személyes, egyéni interjúk a vezetőkkel és a kulcsemberekkel, amiből írásos összefoglaló készül, amit személyesen mutatunk be. Szó esik benne a cég erősségeiről, a nehézségeiről és a ki nem mondott, visszatérő problémákról. Kapsz javaslatokat is a jobb működéshez, pl. belső kommunikáció, döntési jogkörök, feladatmegosztás, teljesítményértékelés, munkaszervezés témákban. Része a távlati irány vázlata is, vagyis hogy honnan hova juthatunk. Ezt itt még nem dolgozzuk ki részletesen, mert azok a havi együttműködésben, veled közösen alakulnak ki.",
       "A diagnózis díjáról a személyes beszélgetések után adunk ajánlatot.",
     ],
-    image: szervezetfejlesztes,
+    image: cegesDiagnozis,
   },
   {
     id: "havi-egyuttmukodes",
@@ -55,7 +55,7 @@ const OFFERS: Offer[] = [
     after: [
       "Az együttműködés akkor sem ér véget, amikor hátrébb lépsz: folytatjuk az új vezetéssel. A havi díj **490 000 Ft nettótól** indul, a havi óraszámtól és a bevont vezetők számától függően.",
     ],
-    image: munkakorok,
+    image: haviEgyuttmukodes,
   },
   {
     id: "ertekeles-360",
@@ -63,7 +63,7 @@ const OFFERS: Offer[] = [
     paragraphs: [
       "Online kitölthető teszt, amiben az érintett vezetőről a felettese, a beosztottai és a mellérendelt kollégái mondanak véleményt. Több irányból kapsz összevethető visszajelzést, és tényszerű adatokkal láthatod, mi áll a tünetek hátterében.",
     ],
-    image: toborzas,
+    image: ertekeles360,
   },
   {
     id: "dontesi-terkep",
@@ -71,7 +71,7 @@ const OFFERS: Offer[] = [
     paragraphs: [
       "Ez nem egy előre legyártott csomag. Akkor készül, ha a helyzet megkívánja, vagy ha te kéred. Minden cégnél más tematikára van szükség, ezért a havi együttműködés során, közös egyeztetések alapján alakítjuk ki, és írjuk le, ha kéred. Kész, konzerv anyagot nem adunk el.",
     ],
-    image: hrStrategia,
+    image: dontesiTerkep,
   },
 ];
 
@@ -135,7 +135,6 @@ export default function ServicesPage() {
               <div className={styles.circle}>
                 <Image src={o.image} alt="" sizes="(max-width: 900px) 70vw, 420px" loading={i === 0 ? "eager" : "lazy"} />
               </div>
-              <span className={styles.square} />
             </div>
 
             <div className={`${styles.body} reveal`}>

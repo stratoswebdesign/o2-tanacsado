@@ -107,11 +107,25 @@
 }
 
 .serviceImg {
+  position: relative;
   width: 96px;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
   background: var(--paper-3);
+}
+
+.serviceImg::after {
+  content: "";
+  position: absolute;
+  width: 96%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: -40%;
+  border-radius: 50%;
+  background: var(--logo);
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 
 .serviceImg img {

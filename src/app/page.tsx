@@ -7,7 +7,7 @@ import { Rich } from "@/components/Rich";
 import { FOUNDERS } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { SELF_CHECK_PATH } from "@/lib/site";
-import heroImage from "@/images/hr-strategia.png";
+import heroImage from "@/images/hero-cegvezeto.jpg";
 import styles from "./page.module.css";
 
 const HERO_LEAD =
@@ -95,14 +95,19 @@ export default function HomePage() {
               <span className="eyebrow">HR-tanácsadás és szervezetfejlesztés cégtulajdonosoknak</span>{" "}
               Működjön a cég a napi jelenléted nélkül is
             </h1>
-            <p className="lead">
-              <Rich text={HERO_LEAD} />
-            </p>
             <ul className={styles.heroFacts} aria-label="Röviden">
               {HERO_FACTS.map((f) => (
-                <li key={f}>{f}</li>
+                <li key={f}>
+                  <span className={styles.heroFactMark} aria-hidden="true">
+                    <Check />
+                  </span>
+                  {f}
+                </li>
               ))}
             </ul>
+            <p className={styles.heroLead}>
+              <Rich text={HERO_LEAD} />
+            </p>
             <div className={styles.heroCtas}>
               <CtaLink />
             </div>
@@ -119,7 +124,6 @@ export default function HomePage() {
                 className={styles.heroImg}
               />
             </div>
-            <span className={styles.heroSquare} />
           </div>
         </div>
       </section>
