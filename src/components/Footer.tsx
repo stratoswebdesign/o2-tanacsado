@@ -57,6 +57,12 @@ export function Footer() {
       <div className={`container ${styles.bottom}`}>
         <p>© {new Date().getFullYear()} {LEGAL_NAME}</p>
         <a href={PRIVACY_URL}>Adatkezelési tájékoztató</a>
+        <p className={styles.credit}>
+          Készítette és karbantartja:{" "}
+          <a href="https://stratosweb.hu/" target="_blank" rel="noopener">
+            Stratos Webdesign
+          </a>
+        </p>
       </div>
     </footer>
   );

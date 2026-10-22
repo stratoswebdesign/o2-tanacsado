@@ -92,6 +92,16 @@
   align-items: center;
 }
 
+.credit a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.credit a:hover {
+  color: var(--teal);
+}
+
 @media (min-width: 720px) {
   .grid {
     grid-template-columns: 1.4fr 1fr 1fr;
