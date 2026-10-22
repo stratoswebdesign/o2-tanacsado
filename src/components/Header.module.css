@@ -2,10 +2,22 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--line);
+}
+
+/*
+ * Az áttetsző, homályosított háttér külön rétegen van: ha a backdrop-filter
+ * magán a .header-en lenne, az a position: fixed mobilmenü containing blockja
+ * lenne, és a menü a fejléc magasságára zsugorodna (nem nyílna le telefonon).
+ */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: saturate(160%) blur(10px);
   -webkit-backdrop-filter: saturate(160%) blur(10px);
-  border-bottom: 1px solid var(--line);
 }
 
 .bar {
