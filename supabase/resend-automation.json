@@ -1,0 +1,144 @@
+{
+  "_megjegyzes": "A Resend-automatizálás leírása a welcome sorozathoz. A Resend csak hitelesített o2tanacsado.hu domain mellett engedi létrehozni (create-automation). Sablonok: Resend → Templates, aliasok o2-kerdessor-1..5. Esemény: o2.kerdessor.kitoltve (a supabase/functions/kerdessor küldi). Időzítés: 0., 2., 5., 8., 12. nap. Adattakarékosság: a névjegy az utolsó levél után 30 nappal törlődik a Resendből (adatkezelési tájékoztató).",
+  "name": "O2 önellenőrző kérdéssor – welcome sorozat",
+  "status": "enabled",
+  "workflow": {
+    "steps": [
+      {
+        "key": "trigger",
+        "type": "trigger",
+        "config": {
+          "eventName": "o2.kerdessor.kitoltve"
+        },
+        "next": "send_email_1"
+      },
+      {
+        "key": "send_email_1",
+        "type": "send_email",
+        "config": {
+          "template": {
+            "id": "51961685-6ced-4d36-ba30-471fd8c46827",
+            "variables": {
+              "SCORE": {
+                "var": "event.score"
+              },
+              "BAND_TITLE": {
+                "var": "event.bandTitle"
+              },
+              "BAND_TEXT_1": {
+                "var": "event.bandText1"
+              },
+              "BAND_TEXT_2": {
+                "var": "event.bandText2"
+              },
+              "RESULT_URL": {
+                "var": "event.resultUrl"
+              }
+            }
+          },
+          "from": "Tibor és Ádám <info@o2tanacsado.hu>",
+          "replyTo": "info@o2tanacsado.hu"
+        },
+        "next": "delay_1"
+      },
+      {
+        "key": "delay_1",
+        "type": "delay",
+        "config": {
+          "duration": "2 days"
+        },
+        "next": "send_email_2"
+      },
+      {
+        "key": "send_email_2",
+        "type": "send_email",
+        "config": {
+          "template": {
+            "id": "60f091f6-4636-4ecb-b303-a8a1be9d3d12"
+          },
+          "from": "Tibor és Ádám <info@o2tanacsado.hu>",
+          "replyTo": "info@o2tanacsado.hu",
+          "subject": "Három hét nyaralás, és egyszer sem hívtak"
+        },
+        "next": "delay_2"
+      },
+      {
+        "key": "delay_2",
+        "type": "delay",
+        "config": {
+          "duration": "3 days"
+        },
+        "next": "send_email_3"
+      },
+      {
+        "key": "send_email_3",
+        "type": "send_email",
+        "config": {
+          "template": {
+            "id": "b03186e4-4c71-447e-95b3-a2e7d016c01c"
+          },
+          "from": "Tibor és Ádám <info@o2tanacsado.hu>",
+          "replyTo": "info@o2tanacsado.hu",
+          "subject": "Mi van, ha a kollégák hibáznak?"
+        },
+        "next": "delay_3"
+      },
+      {
+        "key": "delay_3",
+        "type": "delay",
+        "config": {
+          "duration": "3 days"
+        },
+        "next": "send_email_4"
+      },
+      {
+        "key": "send_email_4",
+        "type": "send_email",
+        "config": {
+          "template": {
+            "id": "d3bb27e1-25f2-463a-ae20-7e1546f209da"
+          },
+          "from": "Tibor és Ádám <info@o2tanacsado.hu>",
+          "replyTo": "info@o2tanacsado.hu",
+          "subject": "Egy negyedévbe telt, mire észrevettem"
+        },
+        "next": "delay_4"
+      },
+      {
+        "key": "delay_4",
+        "type": "delay",
+        "config": {
+          "duration": "4 days"
+        },
+        "next": "send_email_5"
+      },
+      {
+        "key": "send_email_5",
+        "type": "send_email",
+        "config": {
+          "template": {
+            "id": "805d9212-7865-4684-821d-8a718df5fce1"
+          },
+          "from": "Tibor és Ádám <info@o2tanacsado.hu>",
+          "replyTo": "info@o2tanacsado.hu",
+          "subject": "Ez az utolsó levél ebből a sorozatból"
+        },
+        "next": "delay_5"
+      },
+      {
+        "key": "delay_5",
+        "type": "delay",
+        "config": {
+          "duration": "30 days"
+        },
+        "next": "contact_delete"
+      },
+      {
+        "key": "contact_delete",
+        "type": "contact_delete",
+        "config": {},
+        "next": null
+      }
+    ]
+  }
+}

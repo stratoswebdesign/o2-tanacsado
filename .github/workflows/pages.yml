@@ -35,6 +35,8 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: ""
           NEXT_PUBLIC_SITE_ENV: production
           NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+          # Az önellenőrző kérdéssor kitöltését a Supabase Edge Function fogadja (supabase/functions/kerdessor).
+          NEXT_PUBLIC_SELF_CHECK_ENDPOINT: https://tfjtkwjmrxbhvkktmmau.supabase.co/functions/v1/kerdessor
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

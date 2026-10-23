@@ -63,6 +63,11 @@ export const SERVICE_PAGES = [
 
 /** Önellenőrző kérdéssor (opt-in oldal). */
 export const SELF_CHECK_PATH = "/onellenorzo-kerdessor/";
+/**
+ * A kitöltést fogadó végpont. Statikus tárhelyen (GitHub Pages) a Supabase Edge Function
+ * (supabase/functions/kerdessor), szerveres tárhelyen üresen hagyva a saját /api/kerdessor/ útvonal.
+ */
+export const SELF_CHECK_ENDPOINT = process.env.NEXT_PUBLIC_SELF_CHECK_ENDPOINT || "";
 export const SELF_CHECK_ANCHOR = "kerdessor";
 
 export const LOCAL_PAGES = [

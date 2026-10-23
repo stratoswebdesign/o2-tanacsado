@@ -76,15 +76,31 @@ helyi tevékenységre (helyszíni működés, esemény, partner, publikálható 
 
 - Tartalom: `src/lib/self-check.ts` (állítások, pontozás, három értékelés, közös záró).
 - Folyamat (`src/components/SelfCheck.tsx`): keresztnév, e-mail-cím, hozzájárulás → 12 állítás
-  egy oldalon → az értékelés azonnal megjelenik.
-- `src/app/api/kerdessor/route.ts`: a kitöltő megkapja a welcome sorozat **1. levelét** (az
-  értékeléssel és az eredményoldal linkjével), az O2 értesítést kap a pontszámmal és a válaszokkal.
-  Statikus tárhelyen (GitHub Pages) nincs szerveroldali küldés: ott az értékelés csak az oldalon
-  jelenik meg, és a felület jelzi, hogy az e-mail nem ment ki.
-- A sorozat mind az 5 levele (tárgyak, előnézeti szöveg, törzs) `src/lib/welcome-series.ts`-ben
-  van. **A 2–5. levél (2., 5., 8., 12. nap) automatikus kiküldéséhez e-mail-automatizáló
-  szolgáltatás kell** (ütemezés, leiratkozás); ennek bekötése még nyitott.
-- Az adatkezelési tájékoztatóban a kérdéssor adatkezelését (cél, megőrzés, hírlevél) még rögzíteni kell.
+  egy oldalon → az értékelés azonnal megjelenik → a kitöltés elküldése a végpontnak.
+- **Végpont élesben (GitHub Pages):** Supabase Edge Function, `supabase/functions/kerdessor`
+  (projekt: `o2-tanacsado`, a `stratosweb` szervezetben). Az oldal a
+  `NEXT_PUBLIC_SELF_CHECK_ENDPOINT` címre küld (a `pages.yml` állítja be). A függvény:
+  1. elmenti a kitöltést a `kerdessor_kitoltesek` táblába (RLS bekapcsolva, csak a függvény éri el);
+  2. a Resendben felveszi a kitöltőt keresztnévvel, és elküldi az `o2.kerdessor.kitoltve` eseményt;
+  3. értesítést küld az O2-nak (`info@o2tanacsado.hu`) a pontszámmal és a válaszokkal.
+  Védelem: csak az o2tanacsado.hu-ról fogad, honeypot, IP-nként óránként 10 kitöltés, ugyanarra
+  a címre 24 órán belül nem indítja újra a sorozatot.
+- **A levélsorozat** (5 levél: 0., 2., 5., 8., 12. nap) egy Resend-automatizálás. A sablonok a
+  Resendben vannak (`o2-kerdessor-1` … `-5` aliasok), a szövegük a `src/lib/welcome-series.ts`
+  szerint. Az automatizálás leírása: `supabase/resend-automation.json`.
+- **Bekapcsolás feltételei:** (1) a `send`, `resend._domainkey` és `rsend` DNS-rekordok az
+  o2tanacsado.hu-n, és a domain hitelesítése a Resendben; (2) a Resend-automatizálás
+  létrehozása a `supabase/resend-automation.json` alapján; (3) `RESEND_API_KEY` a Supabase-ben
+  (Edge Functions → Secrets); (4) a függvényben `WELCOME_SERIES_LIVE = true`, majd újratelepítés.
+  Addig a kitöltések csak az adatbázisba kerülnek, és az oldal jelzi, hogy e-mail nem ment ki.
+- **Ébrentartás:** az ingyenes Supabase-projekt egy hét kevés forgalom után leállhat, ezért a
+  `.github/workflows/supabase-ebrentartas.yml` naponta meghívja a függvényt (adatbázis-lekérdezés).
+- A `self-check.ts` másolata a függvény mappájában is ott van; ha a kérdéssor szövege vagy
+  pontozása változik, mindkettőt frissíteni kell, és újratelepíteni a függvényt.
+- Szerveres tárhelyen (`NEXT_PUBLIC_SELF_CHECK_ENDPOINT` nélkül) a saját `src/app/api/kerdessor`
+  útvonal küldi az 1. levelet és az értesítést.
+- Az adatkezelési tájékoztatóban a kérdéssor adatkezelését (cél, megőrzés, a Supabase és a
+  Resend mint adatfeldolgozó, a levélsorozat) még rögzíteni kell.
 
 Küldési beállítások (`.env.local`): `RESEND_API_KEY` **vagy** `SMTP_HOST`, `SMTP_PORT`,
 `SMTP_USER`, `SMTP_PASS` (+ `SMTP_SECURE`), valamint `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.

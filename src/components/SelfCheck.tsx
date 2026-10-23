@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ArrowRight } from "./Icons";
 import { SelfCheckResult } from "./SelfCheckResult";
-import { IS_STATIC_EXPORT, PRIVACY_URL, SELF_CHECK_ANCHOR } from "@/lib/site";
+import { IS_STATIC_EXPORT, PRIVACY_URL, SELF_CHECK_ANCHOR, SELF_CHECK_ENDPOINT } from "@/lib/site";
 import {
   ANSWER_OPTIONS,
   SELF_CHECK_HINT,
@@ -17,7 +17,7 @@ import { validateOptIn, type OptInErrors, type SelfCheckOptIn } from "@/lib/vali
 import styles from "./SelfCheck.module.css";
 
 type Step = "optin" | "questions" | "result";
-type MailStatus = "idle" | "sending" | "sent" | "failed";
+type MailStatus = "idle" | "sending" | "sent" | "duplicate" | "failed";
 
 const EMPTY: SelfCheckOptIn = { firstName: "", email: "", consent: false, website: "" };
 
@@ -72,19 +72,27 @@ export function SelfCheck({ intro }: Props) {
   };
 
   const send = async (complete: Answers) => {
-    if (IS_STATIC_EXPORT || optIn.website) {
+    // Statikus tárhelyen a Supabase-függvény fogadja a kitöltést, szerveres tárhelyen a saját API.
+    const endpoint = SELF_CHECK_ENDPOINT || (IS_STATIC_EXPORT ? "" : "/api/kerdessor/");
+    if (!endpoint || optIn.website) {
       setMail("failed");
       return;
     }
     setMail("sending");
     try {
-      const res = await fetch("/api/kerdessor/", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...optIn, answers: complete }),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
-      setMail(res.ok && data.ok ? "sent" : "failed");
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        mailed?: boolean;
+        duplicate?: boolean;
+      };
+      if (!res.ok || !data.ok) setMail("failed");
+      else if (data.duplicate) setMail("duplicate");
+      else setMail(data.mailed === false ? "failed" : "sent");
     } catch {
       setMail("failed");
     }
@@ -181,7 +189,8 @@ export function SelfCheck({ intro }: Props) {
                 />
                 <span>
                   Hozzájárulok, hogy az O2 Tanácsadó Kft. az adataimat a kérdéssor eredményének
-                  elküldésére és a kapcsolatfelvételre kezelje. (
+                  elküldésére, az azt követő levélsorozat (12 nap alatt további 4 levél) küldésére és a
+                  kapcsolatfelvételre kezelje. (
                   <a href={PRIVACY_URL} target="_blank" rel="noopener">
                     Adatkezelési tájékoztató
                   </a>
@@ -277,6 +286,8 @@ export function SelfCheck({ intro }: Props) {
                     Az értékelést elküldtük a(z) <strong>{optIn.email.trim()}</strong> címre is.
                   </>
                 )}
+                {mail === "duplicate" &&
+                  "Erre az e-mail-címre az elmúlt napban már elküldtük az értékelést, ezért most nem küldünk újabb levelet."}
                 {mail === "failed" && "Az e-mailt most nem sikerült elküldeni, az értékelésed itt látható."}
               </p>
             }
