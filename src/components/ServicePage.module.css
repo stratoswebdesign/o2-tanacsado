@@ -32,12 +32,6 @@
   padding-left: 22px;
 }
 
-.coverage {
-  color: var(--ink-2);
-  text-wrap: pretty;
-  font-size: 0.98rem;
-}
-
 .quickFacts {
   list-style: none;
   display: grid;
@@ -376,12 +370,6 @@
 .extraTitle {
   font-size: clamp(1.7rem, 2.8vw, 2.4rem);
   margin-bottom: 0.6em;
-}
-
-.extraList {
-  background: var(--paper-2);
-  border-radius: var(--radius);
-  padding: clamp(22px, 3vw, 32px);
 }
 
 @media (min-width: 960px) {

@@ -1,24 +1,17 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CtaBand } from "./CtaBand";
 import { CtaLink } from "./CtaLink";
-import { Experience } from "./Experience";
 import { FaqList, faqPageLd } from "./FaqList";
 import { ArrowRight, Check } from "./Icons";
-import { QuoteSection } from "./QuoteSection";
 import { POST_BY_SLUG } from "@/lib/blog";
 import type { ServicePageData } from "@/lib/services";
 import { breadcrumbLd, jsonLd } from "@/lib/seo";
-import { COVERAGE_STATEMENT, LEGAL_NAME, SERVICE_PAGES, SITE_URL } from "@/lib/site";
+import { LEGAL_NAME, SERVICE_PAGES, SITE_URL } from "@/lib/site";
 import styles from "./ServicePage.module.css";
 
-/** Kapcsolódó oldal címkéje: szolgáltatási oldal vagy a /szolgaltatasok/ horgonya. */
 function relatedLabel(path: string) {
-  const svc = SERVICE_PAGES.find((s) => s.href === path);
-  if (svc) return svc.label;
-  if (path === "/szolgaltatasok/#toborzas") return "Toborzás és kiválasztás";
-  if (path === "/szolgaltatasok/#munkakorok") return "Munkakörök és szervezeti struktúra";
-  if (path === "/szolgaltatasok/#hr-strategia") return "HR-stratégia";
-  return "Szolgáltatások";
+  return SERVICE_PAGES.find((s) => s.href === path)?.label ?? "Szolgáltatások";
 }
 
 interface Props {
@@ -48,7 +41,7 @@ export function ServicePage({ page, children }: Props) {
     ],
     audience: {
       "@type": "BusinessAudience",
-      name: "20–200 fős kis- és középvállalkozások vezetői és tulajdonosai",
+      name: "20–200 fős vállalkozások cégtulajdonos vezetői",
     },
   };
 
@@ -59,24 +52,22 @@ export function ServicePage({ page, children }: Props) {
         <span className="o2-ring" style={{ width: 640, height: 640, right: -260, top: -300 }} aria-hidden="true" />
         <div className={`container ${styles.headGrid}`}>
           <div>
-            <p className="eyebrow">{page.eyebrow}</p>
-            <h1 id="service-h1">{page.h1}</h1>
+            <h1 id="service-h1">
+              <span className="eyebrow">{page.eyebrow}</span> {page.h1}
+            </h1>
             <p className="lead">{page.lead}</p>
             <div className={styles.headCtas}>
-              <CtaLink local>
-                {page.cta}
-              </CtaLink>
+              <CtaLink />
               <a href="#folyamat" className="btn btn--ghost">
                 Hogyan dolgozunk?
               </a>
             </div>
           </div>
-          <aside className={styles.headAside} aria-label="Országos működés">
-            <p className={styles.coverage}>{COVERAGE_STATEMENT}</p>
+          <aside className={styles.headAside} aria-label="Röviden">
             <ul className={styles.quickFacts}>
-              <li>20–200 fős kkv-knak</li>
-              <li>Online és helyszínen, országosan</li>
-              <li>Gyakorló cégvezető tanácsadók</li>
+              {page.facts.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
             </ul>
           </aside>
         </div>
@@ -122,9 +113,9 @@ export function ServicePage({ page, children }: Props) {
             <h2 id="symptoms-title">{page.symptoms.title}</h2>
             <p className="lead">
               {page.symptoms.intro ??
-                "Ha ezek közül legalább kettő ismerős, érdemes egy első egyeztetésen átbeszélni a helyzetet."}
+                "Ha ezek közül kettő-három ismerős, érdemes a személyes beszélgetésen átbeszélni a helyzetet."}
             </p>
-            <CtaLink local variant="ghost">
+            <CtaLink variant="ghost">
               Beszéljük át a helyzetet
             </CtaLink>
           </div>
@@ -146,7 +137,7 @@ export function ServicePage({ page, children }: Props) {
         <div className="container">
           <div className={`${styles.split} reveal`}>
             <div>
-              <p className="eyebrow">Az együttműködés folyamata</p>
+              <p className="eyebrow">Hogyan zajlik</p>
               <h2 id="process-title">{page.process.title}</h2>
             </div>
             {page.process.intro && <p className="lead">{page.process.intro}</p>}
@@ -172,7 +163,7 @@ export function ServicePage({ page, children }: Props) {
         <span className="o2-ring" style={{ width: 520, height: 520, left: -220, top: -240 }} aria-hidden="true" />
         <div className={`container ${styles.resultsGrid}`}>
           <div className="reveal">
-            <p className="eyebrow">Várható eredmények</p>
+            <p className="eyebrow">Mire számíthatsz</p>
             <h2 id="results-title">{page.results.title}</h2>
             <p className="lead">{page.results.intro}</p>
             <p className={styles.caveat}>{page.results.caveat}</p>
@@ -191,48 +182,15 @@ export function ServicePage({ page, children }: Props) {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {page.extraSections?.map((x) => (
-        <section key={x.id} id={x.id} className="section" aria-labelledby={`${x.id}-title`}>
-          <div className={`container ${styles.extraGrid}`}>
-            <div className="reveal">
-              <h2 id={`${x.id}-title`} className={styles.extraTitle}>
-                {x.title}
-              </h2>
-              <div className="prose">
-                {x.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-            </div>
-            {x.bullets && (
-              <ul className={`${styles.checkList} ${styles.extraList} reveal`}>
-                {x.bullets.map((b) => (
-                  <li key={b}>
-                    <span className={styles.checkMark} aria-hidden="true">
-                      <Check />
-                    </span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </section>
-      ))}
-
-      <Experience tinted compact />
-
-      {/* ---------------------------------------------------------------- */}
       <section className="section" id="gyik" aria-labelledby="faq-title">
         <div className={`container ${styles.faqGrid}`}>
           <div className={`${styles.faqIntro} reveal`}>
             <p className="eyebrow">Gyakori kérdések</p>
             <h2 id="faq-title">Amit a legtöbben megkérdeznek</h2>
             <p className={styles.faqText}>
-              Ha a kérdésére nem talál választ, írja meg az egyeztetéskérésben. Minden megkeresésre
-              válaszolunk.
+              Ha nem találod a választ a kérdésedre, írd meg nekünk. Mindenkinek válaszolunk.
             </p>
-            <CtaLink local variant="ghost" size="sm">
+            <CtaLink variant="ghost" size="sm">
               Kérdésem van
             </CtaLink>
           </div>
@@ -282,7 +240,7 @@ export function ServicePage({ page, children }: Props) {
         </div>
       </section>
 
-      <QuoteSection title={page.form.title} text={page.form.text} />
+      <CtaBand id="cta-title" title={page.cta.title} text={page.cta.text} />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqPageLd(page.faq)) }} />

@@ -42,7 +42,7 @@ export default function BlogIndexPage() {
             <p className="eyebrow">Blog</p>
             <h1 id="blog-h1">Gyakorlati HR- és vezetési tudás kkv-vezetőknek</h1>
             <p className="lead">
-              Rövid, konkrét cikkek 20–200 fős cégek tulajdonosainak és vezetőinek: mit lehet
+              Rövid, konkrét cikkek 20–200 fős cégek tulajdonosainak és vezetőinek: mit tudsz
               megcsinálni házon belül, és mikor érdemes külső segítséget bevonni.
             </p>
           </div>
@@ -87,10 +87,10 @@ export default function BlogIndexPage() {
             <p className="eyebrow">Szolgáltatások</p>
             <h2 id="blog-services-title">Ha a cikk nem elég, beszéljük át a helyzetet</h2>
             <p className="lead">
-              A cikkek általános helyzetekről szólnak. A cég helyzete konkrét. Az első egyeztetés
-              díjmentes, online vagy a cégnél, országosan.
+              A cikkek általános helyzetekről szólnak, a te céged helyzete viszont konkrét. Az első
+              találkozó díjmentes, és nem jár elköteleződéssel.
             </p>
-            <CtaLink>Kérjen első egyeztetést</CtaLink>
+            <CtaLink />
           </div>
           <ul className={styles.serviceList}>
             {SERVICE_PAGES.map((s) => (

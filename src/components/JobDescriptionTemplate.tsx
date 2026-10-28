@@ -18,10 +18,10 @@ export function JobDescriptionTemplate() {
         <div className={styles.head}>
           <div>
             <p className="eyebrow">A minta</p>
-            <h2 id="minta-title">Munkaköri leírás minta – másolható sablon</h2>
+            <h2 id="minta-title">Munkaköri leírás minta: másolható sablon</h2>
             <p className="lead">
-              Töltse ki a pontozott részeket, a dőlt betűs útmutatókat pedig törölje. Egy–két oldalnál ne
-              legyen hosszabb. A minta a munkaszerződés mellékleteként használható; a jogi tartalmat
+              Töltsd ki a pontozott részeket, a dőlt betűs útmutatókat pedig töröld. Egy-két oldalnál ne
+              legyen hosszabb. A minta a munkaszerződés mellékleteként használható, a jogi tartalmát
               érdemes munkajogásszal ellenőriztetni.
             </p>
           </div>
@@ -55,24 +55,24 @@ export function JobDescriptionTemplate() {
           <h3>Rövid kitöltési útmutató</h3>
           <ol className={styles.guideList}>
             <li>
-              <strong>A munkakör céljával kezdje.</strong> Ha egy-két mondatban nem tudja leírni, miért van a
+              <strong>A munkakör céljával kezdd.</strong> Ha egy-két mondatban nem tudod leírni, miért van a
               munkakör, a munkakörrel van baj, nem a leírással.
             </li>
             <li>
-              <strong>A fő feladatokat a betöltővel együtt írja.</strong> A vezető tudja, mi a fontos, a kolléga
-              tudja, mi a valóság. A kettő együtt ad használható listát.
+              <strong>A fő feladatokat a munkakör betöltőjével együtt írd.</strong> A vezető tudja, mi a fontos,
+              a kolléga tudja, mi a valóság. A kettő együtt ad használható listát.
             </li>
             <li>
-              <strong>A döntési jogkört ne hagyja ki.</strong> Ez az a rész, amely a napi működésben a legtöbbet
-              számít: a kolléga tudja, miről dönthet, és nem visz minden kérdést a vezetőhöz.
+              <strong>A döntési jogkört ne hagyd ki.</strong> Ez számít a legtöbbet a napi működésben: a kolléga
+              tudja, miről dönthet, és nem visz minden kérdést a vezetőjéhez.
             </li>
             <li>
-              <strong>Teljesítménymutatóból 2–4 legyen,</strong> és olyan, amelyet a kolléga a saját munkájával
-              befolyásol.
+              <strong>Teljesítménymutatóból 2–4 legyen,</strong> és olyan, amire a kolléga a saját munkájával
+              hatni tud.
             </li>
             <li>
-              <strong>Beszélgetésben adja át,</strong> ne e-mailben. Évente egyszer, a teljesítménybeszélgetéssel
-              együtt nézzék át, és frissítsék, ha a munkakör változott.
+              <strong>Beszélgetésben add át,</strong> ne e-mailben. Évente egyszer, a teljesítménybeszélgetéssel
+              együtt nézzétek át, és frissítsétek, ha a munkakör változott.
             </li>
           </ol>
         </div>

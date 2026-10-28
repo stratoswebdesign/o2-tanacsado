@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CtaBand } from "@/components/CtaBand";
 import { CtaLink } from "@/components/CtaLink";
 import { ArrowRight } from "@/components/Icons";
-import { QuoteSection } from "@/components/QuoteSection";
 import { POSTS, POST_BY_SLUG, formatDate, readingMinutes } from "@/lib/blog";
 import { FOUNDERS } from "@/lib/content";
 import { breadcrumbLd, jsonLd, pageMetadata } from "@/lib/seo";
@@ -96,13 +96,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             ))}
 
             <aside className={styles.cta} aria-labelledby="post-cta-title">
-              <p className="eyebrow">Konzultáció</p>
+              <p className="eyebrow">Első beszélgetés</p>
               <h2 id="post-cta-title">{post.ctaTitle}</h2>
               <p>{post.ctaText}</p>
               <div className={styles.ctaActions}>
-                <CtaLink local>
-                  {post.ctaLabel}
-                </CtaLink>
+                <CtaLink />
                 <Link href={post.service} className="link-arrow">
                   {post.serviceLabel} <ArrowRight />
                 </Link>
@@ -117,9 +115,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 {post.serviceLabel} <ArrowRight />
               </Link>
               <p className={styles.sideText}>
-                Országosan, online és igény szerint helyszínen, 20–200 fős kkv-knak.
+                Országosan, személyesen a cégnél vagy akár online is, 20–200 fős cégeknek.
               </p>
-              <CtaLink local variant="ghost" size="sm">
+              <CtaLink variant="ghost" size="sm">
                 Beszéljük át a helyzetet
               </CtaLink>
             </div>
@@ -139,9 +137,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </article>
 
-      <QuoteSection
-        title={post.ctaTitle}
-        text="Írja le röviden a cég helyzetét. Az első egyeztetés díjmentes, és nem jár kötelezettséggel."
+      <CtaBand
+        id="cta-title"
+        title="Első beszélgetés"
+        text="Mondd el röviden, mi viszi el most a legtöbb energiádat. A találkozó díjmentes és nem jár elköteleződéssel."
       />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(articleLd) }} />

@@ -4,7 +4,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { CtaLink } from "@/components/CtaLink";
 import { ArrowRight, Check } from "@/components/Icons";
 import { Rich } from "@/components/Rich";
-import { FOUNDERS } from "@/lib/content";
+import { FOUNDERS, OFFERS } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { SELF_CHECK_PATH } from "@/lib/site";
 import heroImage from "@/images/hero-cegvezeto.jpg";
@@ -59,27 +59,6 @@ const CHANGES = [
   {
     title: "Utána sem hagyunk magadra.",
     text: "Az együttműködés az új vezetéssel folytatódik, mert a cég környezete folyamatosan változik, és a HR-t is hozzá kell igazítani.",
-  },
-];
-
-const OFFERS = [
-  {
-    question: "Szeretnéd kívülről látni, mi történik a cégedben?",
-    name: "Céges diagnózis.",
-    text: "Interjúk a vezetőkkel és a kulcsemberekkel, beszélgetések veled, majd írásos összefoglaló, amit személyesen mutatunk be: erősségek, nehézségek, ki nem mondott, visszatérő problémák és javaslatok.",
-    href: "/szervezetfejlesztes/",
-  },
-  {
-    question: "Szeretnéd, hogy rendszeresen ott legyünk melletted?",
-    name: "Havi együttműködés.",
-    text: "Havonta a cégnél vagyunk: vezetői és HR-tanácsadás, egyéni és team coachingok, a folyamatok és a belső kommunikáció fejlesztése, a nem adminisztratív HR-feladatok átvétele.",
-    href: "/hr-tanacsadas-kkv-knak/",
-  },
-  {
-    question: "Adatokkal látnád, honnan jönnek a tünetek?",
-    name: "360 fokos értékelés.",
-    text: "Online kitölthető teszt, amiben a felettes, a beosztottak és a mellérendelt kollégák mondanak véleményt az érintett vezetőről, kollégáról.",
-    href: "/szolgaltatasok/#ertekeles-360",
   },
 ];
 

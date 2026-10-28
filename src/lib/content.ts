@@ -1,129 +1,54 @@
 import type { StaticImageData } from "next/image";
-import hrStrategia from "@/images/dontesi-terkep.jpg";
-import toborzas from "@/images/ceges-diagnozis.jpg";
-import munkakorok from "@/images/munkakorok-dokumentumok.jpg";
-import szervezetfejlesztes from "@/images/havi-egyuttmukodes.jpg";
+import cegesDiagnozis from "@/images/ceges-diagnozis.jpg";
+import ertekeles360 from "@/images/ertekeles-360.jpg";
+import haviEgyuttmukodes from "@/images/havi-egyuttmukodes.jpg";
 import marczali from "@/images/marczali-tibor.png";
 import wortmann from "@/images/wortmann-adam.png";
 
-export type ServiceId =
-  | "hr-strategia"
-  | "toborzas"
-  | "munkakorok"
-  | "szervezetfejlesztes";
+export type OfferId = "ceges-diagnozis" | "havi-egyuttmukodes" | "ertekeles-360";
 
-export interface Service {
-  id: ServiceId;
-  num: string;
-  title: string;
-  shortTitle: string;
-  lead: string;
-  when: string[];
-  includes: string[];
-  business: string;
+export interface Offer {
+  id: OfferId;
+  question: string;
+  /** Félkövér név a szöveg elején, ponttal (ahogy a szövegdokumentumban). */
+  name: string;
+  text: string;
+  href: string;
   image: StaticImageData;
-  imageAlt: string;
 }
 
 /**
- * A négy szolgáltatási terület. A "includes" listák a jelenlegi
- * o2tanacsado.hu oldalon szereplő tartalmak átfogalmazásai; új ígéretet,
- * eredményt vagy garanciát nem tartalmaznak.
+ * „Ebben tudunk segíteni” – a Főoldal szolgáltatásszekciója a szövegdokumentum
+ * szerint, átírás nélkül. A térségi oldalak is ezt a listát használják.
  */
-export const SERVICES: Service[] = [
+export const OFFERS: Offer[] = [
   {
-    id: "hr-strategia",
-    num: "01",
-    title: "HR-stratégia és vállalati célok",
-    shortTitle: "HR-stratégia",
-    lead: "Világos misszió, vízió és HR-stratégia, amely a cég üzleti céljaiból indul ki, és keretet ad a munkaerő megtartásának.",
-    when: [
-      "A cég gyorsan nőtt, de a HR-működés még a korábbi méretre van szabva.",
-      "A vezetők másképp látják, merre tart a vállalat, és ez a csapatban is bizonytalanságot okoz.",
-      "A munkaerő megtartása eseti reakciókból áll, nincs mögötte átgondolt keret.",
-    ],
-    includes: [
-      "Vállalati célok meghatározása",
-      "Misszió és vízió megfogalmazása",
-      "HR-stratégia kialakítása",
-      "Munkaerő-megtartás",
-    ],
-    business:
-      "Az emberekkel kapcsolatos döntések akkor támogatják az üzleti növekedést, ha a cég céljaihoz kapcsolódnak. A HR-stratégia ezt a kapcsolatot teremti meg: a vezetés tudja, milyen csapatra van szüksége a következő évekre, és mit tesz a kulcsemberek megtartásáért.",
-    image: hrStrategia,
-    imageAlt: "Tervezés öntapadós cetlikkel egy irodai üvegfalon",
+    id: "ceges-diagnozis",
+    question: "Szeretnéd kívülről látni, mi történik a cégedben?",
+    name: "Céges diagnózis.",
+    text: "Interjúk a vezetőkkel és a kulcsemberekkel, beszélgetések veled, majd írásos összefoglaló, amit személyesen mutatunk be: erősségek, nehézségek, ki nem mondott, visszatérő problémák és javaslatok.",
+    href: "/szervezetfejlesztes/",
+    image: cegesDiagnozis,
   },
   {
-    id: "toborzas",
-    num: "02",
-    title: "Toborzás és kiválasztás",
-    shortTitle: "Toborzás",
-    lead: "Recruitment-stratégia és a kiválasztás lebonyolítása: a kulcspozíciók meghatározásától a megfelelő kulcsemberek megtalálásáig.",
-    when: [
-      "Hónapok óta nyitva van egy fontos pozíció, és a beérkező jelentkezők nem felelnek meg.",
-      "Nem egyértelmű, mely pozíciók kritikusak a cég működése és növekedése szempontjából.",
-      "A kiválasztás ad hoc módon zajlik, és a felvett kollégák egy része hamar távozik.",
-    ],
-    includes: [
-      "Recruitment-stratégia kialakítása",
-      "Toborzás és kiválasztás lebonyolítása",
-      "A vállalat kulcspozícióinak meghatározása",
-      "A szükséges kulcsemberek megtalálása",
-    ],
-    business:
-      "A betöltetlen kulcspozíció közvetlen üzleti költség: csúszó projektek, túlterhelt vezetők, elmaradó bevétel. A tudatos toborzási stratégia azt biztosítja, hogy a cég a valóban fontos pozíciókra koncentráljon, és a kiválasztás a vállalat igényeiből induljon ki.",
-    image: toborzas,
-    imageAlt: "Négyszemközti beszélgetés egy irodai íróasztalnál",
+    id: "havi-egyuttmukodes",
+    question: "Szeretnéd, hogy rendszeresen ott legyünk melletted?",
+    name: "Havi együttműködés.",
+    text: "Havonta a cégnél vagyunk: vezetői és HR-tanácsadás, egyéni és team coachingok, a folyamatok és a belső kommunikáció fejlesztése, a nem adminisztratív HR-feladatok átvétele.",
+    href: "/hr-tanacsadas-kkv-knak/",
+    image: haviEgyuttmukodes,
   },
   {
-    id: "munkakorok",
-    num: "03",
-    title: "Munkakörök és szervezeti struktúra",
-    shortTitle: "Munkakörök",
-    lead: "Pontos munkaköri leírások és átlátható szervezeti felépítés, hogy mindenki tudja, miért felel és kihez tartozik.",
-    when: [
-      "Feladatok esnek ki vagy duplázódnak, mert a felelősségek nem tisztázottak.",
-      "A cég létszáma nőtt, de a szervezeti felépítés a régi maradt.",
-      "A vezetők túl sok operatív kérdést kapnak, mert nincs egyértelmű döntési szint.",
-    ],
-    includes: [
-      "Munkaköri leírások elkészítése és pontosítása",
-      "Vállalati struktúra kialakítása",
-      "Szervezeti felépítés racionalizálása",
-      "Szervezeti diagram elkészítése",
-    ],
-    business:
-      "A tisztázatlan munkakörök lassítják a működést és feszültséget okoznak a csapatban. Az átlátható struktúra egyszerűbbé teszi a delegálást, a teljesítmény megítélését és az új kollégák beillesztését is.",
-    image: munkakorok,
-    imageAlt: "Vezetők dokumentumokat egyeztetnek egy tárgyalóasztalnál",
-  },
-  {
-    id: "szervezetfejlesztes",
-    num: "04",
-    title: "Képzés, szervezetfejlesztés, coaching",
-    shortTitle: "Szervezetfejlesztés",
-    lead: "Igényfelmérésre épülő képzési stratégia és fejlesztési terv: workshop, tréning, team coaching, valamint egyéni coaching és mentoring.",
-    when: [
-      "A csapat működésében visszatérő súrlódások vannak, de nem látszik az okuk.",
-      "A vezetők vagy kulcsemberek új szerepbe kerültek, és támogatásra van szükségük.",
-      "A cég képezné a kollégákat, de nem tudja, mire érdemes költeni.",
-    ],
-    includes: [
-      "Igényfelmérés, a szervezet diagnózisa",
-      "Fejlesztési terv a hatékony szervezet eléréséhez",
-      "Csoportos képzések: workshop, tréning, team coaching",
-      "Egyéni fejlesztés: coaching, mentoring",
-    ],
-    business:
-      "A fejlesztés akkor éri meg, ha valós szervezeti problémára válaszol. A diagnózisra épülő terv a képzési költséget oda irányítja, ahol a működés hatékonysága és a kollégák motivációja ténylegesen javítható.",
-    image: szervezetfejlesztes,
-    imageAlt: "Vezető beszél a vezetői csapatnak egy tárgyalóban",
+    id: "ertekeles-360",
+    question: "Adatokkal látnád, honnan jönnek a tünetek?",
+    name: "360 fokos értékelés.",
+    text: "Online kitölthető teszt, amiben a felettes, a beosztottak és a mellérendelt kollégák mondanak véleményt az érintett vezetőről, kollégáról.",
+    href: "/szolgaltatasok/#ertekeles-360",
+    image: ertekeles360,
   },
 ];
 
-export const SERVICE_BY_ID = Object.fromEntries(
-  SERVICES.map((s) => [s.id, s]),
-) as Record<ServiceId, Service>;
+export const OFFER_BY_ID = Object.fromEntries(OFFERS.map((o) => [o.id, o])) as Record<OfferId, Offer>;
 
 export interface Founder {
   name: string;

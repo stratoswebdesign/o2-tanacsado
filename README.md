@@ -37,21 +37,24 @@ az útvonalak a régiek maradtak.
 | `/kapcsolat/` | Elérhetőség, első beszélgetés, titoktartás, űrlap | új |
 | `/onellenorzo-kerdessor/` | Opt-in oldal és a 12 állításos önellenőrző kérdéssor | új |
 | `/onellenorzo-kerdessor/eredmeny/?v=…` | Az 1. welcome levélből linkelt értékelés (noindex, a linkben csak a válaszok vannak) | új |
-| `/vezetoi-trening/`, `/munkaero-megtartas/`, `/munkakori-leiras-minta/` | Országos téma- és szolgáltatási oldalak | eredeti (magázó) |
-| `/blog/` és `/blog/<slug>/` | 8 induló cikk (`src/lib/blog.ts`) | eredeti (magázó) |
-| `/hr-tanacsadas-budapest/`, `-gyor/`, `-szeged/` | Korábbi térségi landingek (a láblécből érhetők el) | eredeti (magázó) |
+| `/vezetoi-trening/`, `/munkaero-megtartas/`, `/munkakori-leiras-minta/` | Országos téma- és szolgáltatási oldalak | irányelvek szerint átírt |
+| `/blog/` és `/blog/<slug>/` | 8 cikk (`src/lib/blog.ts`) | irányelvek szerint átírt |
+| `/hr-tanacsadas-budapest/`, `-gyor/`, `-szeged/` | Térségi oldalak (a láblécből érhetők el) | irányelvek szerint átírt |
 | `/adatkezelesi-tajekoztato/` | Saját adatkezelési tájékoztató (a helyőrzőket élesítés előtt ki kell tölteni) | eredeti |
 
 Az új szövegű szolgáltatási oldalak tartalma `src/lib/offers.ts`-ben van, a sablon
 `src/components/OfferPage.tsx`; a szövegben a `**…**` jelölés félkövér (`src/components/Rich.tsx`).
-Az eredeti szövegű szolgáltatási oldalak tartalma `src/lib/services.ts`-ben van, a sablon
-`src/components/ServicePage.tsx` (Service + FAQPage + BreadcrumbList schema). Az új szövegű oldalakon
-nincs tapasztalat-blokk, mert a szövegdokumentum szerint ügyfélnév vagy logó nem szerepelhet. A tapasztalat-blokk
-(`src/components/Experience.tsx`) a `src/lib/site.ts` `EXPERIENCE` konstansából dolgozik: a
-szervezetek logója jelenik meg (`showLogos: true`; a megbízó 2026-09-08-án jelezte, hogy a
-logóhasználati engedély rendelkezésre áll). Ha egy fájl hiányzik a `public/logos/` mappából, a
-blokk szöveges felsorolásra vált; részletek a mappa README-jében.
-A helyi oldalak (`src/lib/local.ts`) térségi állításai szándékosan óvatos, nem statisztikai
+Az „irányelvek szerint átírt” oldalakhoz a dokumentum nem adott szöveget. Ezek a dokumentum
+szabályait és hangnemét követik: tegezés, a két alapító „mi” hangja, cégtulajdonos vezetőknek,
+nincs ügyfélnév, logó, kitalált vélemény, és árként csak a „490 000 Ft nettótól” szerepelhet.
+Ahol az O2 munkájáról szólnak (céges diagnózis, havi együttműködés, coaching), a dokumentum
+leírását követik, és mind az „Első beszélgetés” sávval zárulnak. A szolgáltatási oldalak
+tartalma `src/lib/services.ts`-ben van, a sablon `src/components/ServicePage.tsx`
+(Service + FAQPage + BreadcrumbList schema). Logó- vagy referenciablokk nincs az oldalon: a
+szövegdokumentum szerint titoktartás miatt ügyfélnév vagy logó nem szerepelhet (a korábbi
+`public/logos/` mappa törölve; a nyers forrásfájlok a `logos-source/` mappában maradtak).
+A helyi oldalak (`src/lib/local.ts`) a Főoldal szolgáltatáslistáját mutatják
+(`src/lib/content.ts` `OFFERS`); a térségi állítások szándékosan óvatos, nem statisztikai
 megfogalmazásúak; új térségi oldal csak igazolható, egyedi helyi értékkel készülhet.
 
 A letölthető munkaköri leírás mintát (`public/letoltes/munkakori-leiras-minta.txt`) a

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "HR-tanácsadás, szervezetfejlesztés, vezetői tréning és coaching, munkaerő-megtartás 20–200 fős kkv-knak. Országosan, online és helyszínen. Kérjen első egyeztetést.",
+    "Cégtulajdonos vezetőkkel dolgozunk 20–200 fős vállalkozásokban, hogy a céged egyre kevésbé függjön a napi jelenlétedtől. Gyakorló cégvezetők vagyunk.",
   applicationName: SITE_NAME,
   robots: IS_PRODUCTION ? { index: true, follow: true } : { index: false, follow: false },
   formatDetection: { telephone: false },
@@ -76,7 +76,6 @@ const organizationLd = {
     "Vezetői tréning",
     "Vezetői coaching",
     "Team coaching",
-    "HR-outsourcing",
   ],
   description:
     "HR-tanácsadás, szervezetfejlesztés és vezetőfejlesztés 20–200 fős kkv-knak, országosan, online és helyszínen.",

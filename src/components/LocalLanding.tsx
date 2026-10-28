@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CtaBand } from "./CtaBand";
 import { CtaLink } from "./CtaLink";
 import { ArrowRight, Check } from "./Icons";
-import { QuoteSection } from "./QuoteSection";
-import { FOUNDERS, SERVICES } from "@/lib/content";
+import { FOUNDERS, OFFERS, OFFER_BY_ID } from "@/lib/content";
 import { LOCAL, type LocalPage } from "@/lib/local";
 import { breadcrumbLd, jsonLd } from "@/lib/seo";
 import { ADDRESS, LEGAL_NAME, SERVICE_PAGES, SITE_URL } from "@/lib/site";
@@ -32,7 +32,7 @@ export function LocalLanding({ page }: { page: LocalPage }) {
             <h1 id="local-h1">{page.h1}</h1>
             <p className="lead">{page.intro[0]}</p>
             <div className={styles.headCtas}>
-              <CtaLink local />
+              <CtaLink />
               <Link href="/szolgaltatasok/" className="btn btn--ghost">
                 Szolgáltatások
               </Link>
@@ -41,9 +41,9 @@ export function LocalLanding({ page }: { page: LocalPage }) {
           <div className={styles.headAside}>
             <p className={styles.headAsideText}>{page.intro[1]}</p>
             <ul className={styles.quickFacts}>
-              <li>20–200 fős kkv-knak</li>
-              <li>Négy szolgáltatási terület</li>
-              <li>Gyakorló cégvezető tanácsadók</li>
+              <li>20–200 fős cégeknek</li>
+              <li>Személyesen a cégnél vagy akár online is</li>
+              <li>Gyakorló cégvezető-tanácsadók segítségével</li>
             </ul>
           </div>
         </div>
@@ -57,32 +57,31 @@ export function LocalLanding({ page }: { page: LocalPage }) {
               <h2 id="local-services-title">Miben segítünk {page.city} és {page.county} cégeinek?</h2>
             </div>
             <p className="lead">
-              Mind a négy terület elérhető külön és együtt is, online és igény szerint helyszínen.
-              A részleteket a szolgáltatások oldalon írjuk le, itt azt emeljük ki, mi lehet a
-              térségben különösen releváns.
+              Két lépésben dolgozunk. A diagnózis megmutatja, hol tart a cég, aztán havi
+              rendszerességgel, személyesen segítünk, ahogy a helyzet éppen kívánja.
             </p>
           </div>
           <ol className={styles.services}>
-            {SERVICES.map((s) => (
-              <li key={s.id} className={`${styles.service} reveal`}>
+            {OFFERS.map((o, i) => (
+              <li key={o.id} className={`${styles.service} reveal`}>
                 <div className={styles.serviceImg} aria-hidden="true">
-                  <Image src={s.image} alt="" sizes="120px" loading="lazy" />
+                  <Image src={o.image} alt="" sizes="120px" loading="lazy" />
                 </div>
                 <div className={styles.serviceBody}>
                   <p className={styles.serviceNum} aria-hidden="true">
-                    {s.num}
+                    {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h3>
-                    <Link href={`/szolgaltatasok/#${s.id}`}>{s.title}</Link>
-                  </h3>
-                  <p className={styles.serviceLead}>{s.lead}</p>
-                  <p className={styles.serviceNote}>{page.serviceNotes[s.id]}</p>
+                  <h3>{o.question}</h3>
+                  <p className={styles.serviceLead}>
+                    <Link href={o.href}>
+                      <strong>{o.name}</strong>
+                    </Link>{" "}
+                    {o.text}
+                  </p>
+                  <p className={styles.serviceNote}>{page.offerNotes[o.id]}</p>
                   <div className={styles.serviceLinks}>
-                    <CtaLink local variant="ghost" size="sm">
-                      Egyeztetést kérek erre
-                    </CtaLink>
-                    <Link href={`/szolgaltatasok/#${s.id}`} className="link-arrow">
-                      Részletek <ArrowRight />
+                    <Link href={o.href} className="link-arrow">
+                      Ez érdekel <ArrowRight />
                     </Link>
                   </div>
                 </div>
@@ -99,8 +98,8 @@ export function LocalLanding({ page }: { page: LocalPage }) {
             <p className="eyebrow">Térségi helyzetek</p>
             <h2 id="ctx-title">{page.contextTitle}</h2>
             <p className="lead">
-              Nem ígérünk kész recepteket. Ezek olyan helyzetek, amelyek a térség kkv-inál
-              különösen relevánsak lehetnek, és amelyekben támogatást tudunk adni.
+              Kész receptet nem adunk. Ezek olyan helyzetek, amik a térség cégeinél gyakran
+              előkerülhetnek, és amikben tudunk segíteni.
             </p>
           </div>
           <ol className={styles.ctxList}>
@@ -112,8 +111,8 @@ export function LocalLanding({ page }: { page: LocalPage }) {
                 <div>
                   <h3>{c.title}</h3>
                   <p>{c.text}</p>
-                  <Link href={`/szolgaltatasok/#${c.service}`} className={styles.ctxLink}>
-                    Kapcsolódó szolgáltatás <ArrowRight />
+                  <Link href={OFFER_BY_ID[c.offer].href} className={styles.ctxLink}>
+                    {OFFER_BY_ID[c.offer].name.replace(/\.$/, "")} <ArrowRight />
                   </Link>
                 </div>
               </li>
@@ -133,7 +132,7 @@ export function LocalLanding({ page }: { page: LocalPage }) {
               ))}
             </div>
             <p className={styles.otherRegions}>
-              Országosan dolgozunk, online és igény szerint helyszínen. Részletes szolgáltatási oldalaink:{" "}
+              Országosan dolgozunk, személyesen a cégnél vagy akár online is. Részletes oldalaink:{" "}
               {SERVICE_PAGES.map((s, i) => (
                 <span key={s.href}>
                   <Link href={s.href}>{s.label}</Link>
@@ -153,7 +152,7 @@ export function LocalLanding({ page }: { page: LocalPage }) {
           </div>
 
           <div className={`${styles.trust} reveal`}>
-            <p className="eyebrow">Kik állnak mögötte?</p>
+            <p className="eyebrow">Kik vagyunk?</p>
             <ul className={styles.founders}>
               {FOUNDERS.map((f) => (
                 <li key={f.name}>
@@ -169,9 +168,9 @@ export function LocalLanding({ page }: { page: LocalPage }) {
               ))}
             </ul>
             <p className={styles.trustText}>
-              Több évtizedes stratégiai vezetői és kkv-tulajdonos ügyvezetői tapasztalattal
-              rendelkező HR-tanácsadók, akik a tréneri, coaching és mentoring módszereket saját
-              cégük fejlesztésében kezdték alkalmazni.
+              Tibor és Ádám vagyunk, gyakorló cégvezetők. 25 éve vezetjük a saját informatikai
+              cégünket, az Onlinet Kft.-t, ami a tulajdonosok napi jelenléte nélkül is jól működik. A
+              megélt gyakorlatot és a tanult tudást együtt adjuk át neked.
             </p>
             <p className={styles.trustText}>
               <strong>{LEGAL_NAME}</strong> · {ADDRESS.full}
@@ -183,7 +182,7 @@ export function LocalLanding({ page }: { page: LocalPage }) {
         </div>
       </section>
 
-      <QuoteSection title={page.formTitle} text={page.formText} />
+      <CtaBand id="cta-title" title={page.cta.title} text={page.cta.text} />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageLd) }} />
       <script
