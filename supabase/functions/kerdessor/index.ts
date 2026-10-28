@@ -21,7 +21,7 @@ import { ANSWER_OPTIONS, STATEMENTS, bandFor, encodeAnswers, isComplete, scoreOf
  * A welcome sorozat csak akkor indul, ha a Resendben hitelesítve van az o2tanacsado.hu
  * domain és létezik az automatizálás. Addig a kitöltések csak az adatbázisba kerülnek.
  */
-const WELCOME_SERIES_LIVE = false;
+const WELCOME_SERIES_LIVE = true;
 
 const SITE = "https://o2tanacsado.hu";
 const ALLOWED_ORIGINS = new Set(["https://o2tanacsado.hu", "https://www.o2tanacsado.hu", "http://localhost:3000"]);
@@ -178,7 +178,8 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // A névjegy keresztneve adja a levelek megszólítását ({{{FIRST_NAME}}}).
+    // A megszólítást az esemény firstName mezője adja (sablonokban {{{KERESZTNEV}}}):
+    // a Resend az automatizálás leveleiben a névjegy {{{FIRST_NAME}}} mezőjét nem tölti ki.
     try {
       await resend("/contacts", { email, first_name: firstName, unsubscribed: false });
     } catch {
@@ -188,6 +189,7 @@ Deno.serve(async (req) => {
       event: EVENT,
       email,
       payload: {
+        firstName,
         score,
         bandTitle: band.title,
         bandText1: band.paragraphs[0] ?? "",

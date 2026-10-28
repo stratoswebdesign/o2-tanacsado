@@ -92,7 +92,8 @@ helyi tevékenységre (helyszíni működés, esemény, partner, publikálható 
   o2tanacsado.hu-n, és a domain hitelesítése a Resendben; (2) a Resend-automatizálás
   létrehozása a `supabase/resend-automation.json` alapján; (3) `RESEND_API_KEY` a Supabase-ben
   (Edge Functions → Secrets); (4) a függvényben `WELCOME_SERIES_LIVE = true`, majd újratelepítés.
-  Addig a kitöltések csak az adatbázisba kerülnek, és az oldal jelzi, hogy e-mail nem ment ki.
+  Ha bármelyik hiányzik, a kitöltések csak az adatbázisba kerülnek (`mail_status =
+  not_configured`), és az oldal jelzi, hogy e-mail nem ment ki.
 - **Ébrentartás:** az ingyenes Supabase-projekt egy hét kevés forgalom után leállhat, ezért a
   `.github/workflows/supabase-ebrentartas.yml` naponta meghívja a függvényt (adatbázis-lekérdezés).
 - A `self-check.ts` másolata a függvény mappájában is ott van; ha a kérdéssor szövege vagy

@@ -1,5 +1,5 @@
 {
-  "_megjegyzes": "A Resend-automatizálás leírása a welcome sorozathoz. A Resend csak hitelesített o2tanacsado.hu domain mellett engedi létrehozni (create-automation). Sablonok: Resend → Templates, aliasok o2-kerdessor-1..5. Esemény: o2.kerdessor.kitoltve (a supabase/functions/kerdessor küldi). Időzítés: 0., 2., 5., 8., 12. nap. Adattakarékosság: a névjegy az utolsó levél után 30 nappal törlődik a Resendből (adatkezelési tájékoztató).",
+  "_megjegyzes": "A Resend-automatizálás leírása a welcome sorozathoz. A Resend csak hitelesített o2tanacsado.hu domain mellett engedi létrehozni (create-automation). Sablonok: Resend → Templates, aliasok o2-kerdessor-1..5. Esemény: o2.kerdessor.kitoltve (a supabase/functions/kerdessor küldi). Megszólítás: a sablonok {{{KERESZTNEV}}} változója az esemény firstName mezőjéből jön (a Resend az automatizálásban a {{{FIRST_NAME}}} névjegymezőt nem tölti ki). Időzítés: 0., 2., 5., 8., 12. nap. Adattakarékosság: a névjegy az utolsó levél után 30 nappal törlődik a Resendből (adatkezelési tájékoztató).",
   "name": "O2 önellenőrző kérdéssor – welcome sorozat",
   "status": "enabled",
   "workflow": {
@@ -19,6 +19,9 @@
           "template": {
             "id": "51961685-6ced-4d36-ba30-471fd8c46827",
             "variables": {
+              "KERESZTNEV": {
+                "var": "event.firstName"
+              },
               "SCORE": {
                 "var": "event.score"
               },
@@ -75,7 +78,12 @@
         "type": "send_email",
         "config": {
           "template": {
-            "id": "b03186e4-4c71-447e-95b3-a2e7d016c01c"
+            "id": "b03186e4-4c71-447e-95b3-a2e7d016c01c",
+            "variables": {
+              "KERESZTNEV": {
+                "var": "event.firstName"
+              }
+            }
           },
           "from": "Tibor és Ádám <info@o2tanacsado.hu>",
           "replyTo": "info@o2tanacsado.hu",
@@ -117,7 +125,12 @@
         "type": "send_email",
         "config": {
           "template": {
-            "id": "805d9212-7865-4684-821d-8a718df5fce1"
+            "id": "805d9212-7865-4684-821d-8a718df5fce1",
+            "variables": {
+              "KERESZTNEV": {
+                "var": "event.firstName"
+              }
+            }
           },
           "from": "Tibor és Ádám <info@o2tanacsado.hu>",
           "replyTo": "info@o2tanacsado.hu",
